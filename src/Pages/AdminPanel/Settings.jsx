@@ -7,6 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Sidebar from "./Sidebar";
 import {useStyles} from './Styling';
 import { Container } from '@material-ui/core';
+import Set from './Set';
+import Pass from './Password';
 
 function Settings() {
     const classes = useStyles();
@@ -17,10 +19,8 @@ function Settings() {
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container className = {classes.container}>
-            
-
-settings ya hanoona
-
+            <Set />
+            <Pass />
             </Container>
             </main>
         </div>

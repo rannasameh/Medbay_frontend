@@ -16,8 +16,10 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import Checkbox from './Check';
-// import MaterialUIPickers from './Time';
+import Verify from './Verify';
+
 
 
 const useRowStyles = makeStyles({
@@ -46,13 +48,12 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 
-function createData(name,email, location, phone, registrationDate ,verify) {
+function createData(name,email, md, phone ,verify) {
   return {
     name,
     email,
-    location,
+    md,
     phone,
-    registrationDate,
     verify,
   };
 }
@@ -76,7 +77,7 @@ function Row(props) {
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
-        <Tooltip title="Reminders" placement="right">
+        <Tooltip title="Date" placement="right">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -86,9 +87,8 @@ function Row(props) {
           {row.name}
         </TableCell></StyledTableRow>
         <TableCell align="center">{row.email}</TableCell>
-        <TableCell align="center">{row.location}</TableCell>
+        <TableCell align="center">{row.md}</TableCell>
         <TableCell align="center">{row.phone}</TableCell>
-        <TableCell align="center">{row.registrationDate}</TableCell>
         <TableCell align="center">{row.verify}</TableCell>
       </TableRow>
       <TableRow>
@@ -97,7 +97,7 @@ function Row(props) {
             <Box margin={1}>
               {row.instructions}
               <Typography variant="h8" gutterBottom component="div" style = {{color:"MidnightBlue"}}>
-                Extra Information 
+                Registration Date
               </Typography>
             </Box>
           </Collapse>
@@ -111,18 +111,17 @@ Row.propTypes = {
   row: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
+    md: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    registrationDate: PropTypes.string.isRequired,
   }).isRequired,
 };
 
 const rows = [
-  createData("hana","no" , 6.0, 24,getCurrentDate(), <Checkbox />),
-  createData("hana","no", 9.0, 37,getCurrentDate(),<Checkbox />),
-  createData("hana","no", 16.0, 24,getCurrentDate(),<Checkbox />),
-  createData("hana","no", 3.7, 67,getCurrentDate(),<Checkbox />),
-  createData("hana","no", 16.0, 49,getCurrentDate(),<Checkbox />),
+  createData("hana","Hana@hana.com" ,'link', 24567,<Verify />),
+  createData("hana","Hana@hana.com", 'link', 37455,<Verify />),
+  createData("hana","Hana@hana.com", 'link', 24456,<Verify />),
+  createData("hana","Hana@hana.com", 'link', 67675,<Verify />),
+  createData("hana","Hana@hana.com", 'link', 49567,<Verify />),
 ];
 export default function DTable() {
 
@@ -130,7 +129,7 @@ export default function DTable() {
     <TableContainer component={Paper}>
     <br />
       <Typography variant="h6" gutterBottom component="div"style = {{textAlign:"center" , color:"white", backgroundColor:"#01579b"}} >
-               Patients
+               Verify Doctor
               </Typography>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -138,9 +137,8 @@ export default function DTable() {
             <TableCell />
             <TableCell align="center" style={{color:"white"}}> Name </TableCell>
             <TableCell align="center" style={{color:"white"}}>Email</TableCell>
-            <TableCell align="center" style={{color:"white"}}> Location</TableCell>
+            <TableCell align="center" style={{color:"white"}}> Medical Degree</TableCell>
             <TableCell align="center" style={{color:"white"}}>Phone Number</TableCell>
-            <TableCell align="center" style={{color:"white"}}>Registration Date</TableCell>
             <TableCell align="center" style={{color:"white"}}>Verify</TableCell>
           </TableRow>
         </TableHead>

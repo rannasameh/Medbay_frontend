@@ -1,156 +1,3 @@
-
-// import React, {useEffect} from 'react';
-// import PropTypes from 'prop-types';
-// import { withStyles, makeStyles, darken, lighten} from '@material-ui/core/styles';
-// import Box from '@material-ui/core/Box';
-// import Collapse from '@material-ui/core/Collapse';
-// import IconButton from '@material-ui/core/IconButton';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableContainer from '@material-ui/core/TableContainer';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import Typography from '@material-ui/core/Typography';
-// import Paper from '@material-ui/core/Paper';
-// import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-// import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-// import Tooltip from '@material-ui/core/Tooltip';
-// import Checkbox from './Check';
-// // import MaterialUIPickers from './Time';
-
-
-// const useRowStyles = makeStyles({
-//   root: {
-//     '& > *': {
-//       borderBottom: 'unset',
-//     },
-//   },
-// });
-// const StyledTableCell = withStyles((theme) => ({
-//   head: {
-//     backgroundColor: theme.palette.common.black,
-//     color: theme.palette.common.white,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
-
-// const StyledTableRow = withStyles((theme) => ({
-//   root: {
-//     '&:nth-of-type(odd)': {
-//       backgroundColor: theme.palette.action.hover,
-//     },
-//   },
-// }))(TableRow);
-
-
-// function createData(name,email, location, phone, registrationDate) {
-//   return {
-//     name,
-//     email,
-//     location,
-//     phone,
-//     registrationDate,
-//   };
-// }
-// function getCurrentDate(separator=''){
-//     let newDate = new Date()
-//       let date = newDate.getDate();
-//       let month = newDate.getMonth() + 1;
-//       let year = newDate.getFullYear();
-//       const myDate = newDate.getDate()+"/"+newDate.getUTCMonth()+"/"+newDate.getUTCFullYear();
-    
-//       return myDate;
-//     };
-
-// function Row(props) {
-//   const { row } = props;
-//   const [open, setOpen] = React.useState(false);
-//   const classes = useRowStyles();
-  
-
-//   return (
-//     <React.Fragment>
-//       <TableRow className={classes.root}>
-//         <TableCell>
-//         <Tooltip title="Reminders" placement="right">
-//           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-//             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-//           </IconButton>
-//           </Tooltip>
-//         </TableCell>
-//         <StyledTableRow><TableCell component="th" scope="row">
-//           {row.name}
-//         </TableCell></StyledTableRow>
-//         <TableCell align="center">{row.email}</TableCell>
-//         <TableCell align="center">{row.location}</TableCell>
-//         <TableCell align="center">{row.phone}</TableCell>
-//         <TableCell align="center">{row.registrationDate}</TableCell>
-//       </TableRow>
-//       <TableRow>
-//         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-//           <Collapse in={open} timeout="auto" unmountOnExit>
-//             <Box margin={1}>
-//               {row.instructions}
-//               <Typography variant="h8" gutterBottom component="div" style = {{color:"#233C67"}}>
-//                 Extra Information 
-//               </Typography>
-//             </Box>
-//           </Collapse>
-//         </TableCell>
-//       </TableRow>
-//     </React.Fragment>
-//   );
-// }
-
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     email: PropTypes.string.isRequired,
-//     location: PropTypes.string.isRequired,
-//     phone: PropTypes.string.isRequired,
-//     registrationDate: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
-
-// const rows = [
-//   createData("hana","no" , 6.0, 24,getCurrentDate()),
-//   createData("hana","no", 9.0, 37,getCurrentDate()),
-//   createData("hana","no", 16.0, 24,getCurrentDate()),
-//   createData("hana","no", 3.7, 67,getCurrentDate()),
-//   createData("hana","no", 16.0, 49,getCurrentDate()),
-// ];
-// export default function DTable() {
-
-//   return (
-//     <TableContainer component={Paper}>
-//     <br />
-//       <Typography variant="h6" gutterBottom component="div"style = {{textAlign:"center" , color:"white", backgroundColor:"#01579b"}} >
-//                Patients
-//               </Typography>
-//       <Table aria-label="collapsible table">
-//         <TableHead>
-//           <TableRow style={{backgroundColor: "#01579b"}}>
-//             <TableCell />
-//             <TableCell align="center" style={{color:"white"}}> Name </TableCell>
-//             <TableCell align="center" style={{color:"white"}}>Email</TableCell>
-//             <TableCell align="center" style={{color:"white"}}> Location</TableCell>
-//             <TableCell align="center" style={{color:"white"}}>Phone Number</TableCell>
-//             <TableCell align="center" style={{color:"white"}}>Registration Date</TableCell>
-//           </TableRow>
-//         </TableHead>
-//         <TableBody align="center">
-//           {rows.map((row) => (
-//             <Row key={row.name} row={row} />
-//           ))}
-//         </TableBody>
-//       </Table>
-      
-//     </TableContainer>
-//   );
-// }
 // import React from 'react'
 
 // import CssBaseline from '@material-ui/core/CssBaseline'
@@ -309,13 +156,13 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding='checkbox'>
-          {/* <Checkbox
+        <TableCell padding="checkbox">
+          <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ 'aria-label': 'select all patients' }}
-          /> */}
+          />
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -383,14 +230,11 @@ const EnhancedTableToolbar = (props) => {
   return (
     <TableContainer component={Paper}>
       <Toolbar
-        // className={clsx(classes.root, {
-        //   [classes.highlight]: numSelected > 0,
-        // })}
+        className={clsx(classes.root, {
+          [classes.highlight]: numSelected > 0,
+        })}
       >
-        <Typography className={classes.title} variant="h6" gutterBottom component="div"style = {{textAlign:"center" , color:"white", backgroundColor:"#01579b"}} >
-              Patients
-             </Typography>
-        {/* {numSelected > 0 ? (
+        {numSelected > 0 ? (
           <Typography className={classes.title} style={{ color: "white" }} variant="subtitle1" component="div">
             {numSelected} selected
           </Typography>
@@ -412,7 +256,7 @@ const EnhancedTableToolbar = (props) => {
               <FilterListIcon style={{ color: '#01579b' }} />
             </IconButton>
           </Tooltip>
-        )} */}
+        )}
       </Toolbar>
     </TableContainer>
   );
@@ -462,34 +306,34 @@ export default function EnhancedTable() {
     setOrderBy(property);
   };
 
-  // const handleSelectAllClick = (event) => {
-  //   if (event.target.checked) {
-  //     const newSelecteds = rows.map((n) => n.name);
-  //     setSelected(newSelecteds);
-  //     return;
-  //   }
-  //   setSelected([]);
-  // };
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.name);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
 
-  // const handleClick = (event, name) => {
-  //   const selectedIndex = selected.indexOf(name);
-  //   let newSelected = [];
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
 
-  //   if (selectedIndex === -1) {
-  //     newSelected = newSelected.concat(selected, name);
-  //   } else if (selectedIndex === 0) {
-  //     newSelected = newSelected.concat(selected.slice(1));
-  //   } else if (selectedIndex === selected.length - 1) {
-  //     newSelected = newSelected.concat(selected.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelected = newSelected.concat(
-  //       selected.slice(0, selectedIndex),
-  //       selected.slice(selectedIndex + 1),
-  //     );
-  //   }
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1),
+      );
+    }
 
-  //   setSelected(newSelected);
-  // };
+    setSelected(newSelected);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -500,6 +344,9 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -508,7 +355,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar />
+        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             style={{ color: '#01579b' }}
@@ -523,7 +370,7 @@ export default function EnhancedTable() {
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
+              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
@@ -537,18 +384,18 @@ export default function EnhancedTable() {
                   return (
                     <TableRow
                       hover
-                      // onClick={(event) => handleClick(event, row.firstName)}
-                      // role="checkbox"
-                      // aria-checked={isItemSelected}
+                      onClick={(event) => handleClick(event, row.firstName)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.firstName}
-                      // selected={isItemSelected}
+                      selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        {/* <Checkbox
+                        <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
-                        /> */}
+                        />
                       </TableCell>
                       <TableCell align='center' component="th" id={labelId} scope="row" padding="none" >
                         {row.firstName}

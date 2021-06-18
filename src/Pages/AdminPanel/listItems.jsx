@@ -8,7 +8,7 @@ import ReportIcon from '@material-ui/icons/Report';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import SettingsIcon from '@material-ui/icons/Settings';
-import history from "./history.js";
+import history from "../../history.js";
 
 export const mainListItems = (
   <div style={{ color: 'white' }}>

@@ -7,6 +7,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Sidebar from "./Sidebar";
 import {useStyles} from './Styling';
 import { Container } from '@material-ui/core';
+import P from './TableP';
+import Map from './Map';
+
 
 function ViewReports() {
     const classes = useStyles();
@@ -17,10 +20,8 @@ function ViewReports() {
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container className = {classes.container}>
-            
-
-reportsss
-
+        
+   {/* <Map /> */}
             </Container>
             </main>
         </div>
