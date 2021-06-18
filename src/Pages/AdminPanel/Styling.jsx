@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color:'#01579b'
   },
   drawerPaper: {
     position: 'relative',
@@ -83,14 +84,15 @@ export const useStyles = makeStyles((theme) => ({
 
   },
   minibox: {
-    border: '1px solid grey',
+    border: '1px solid #01579b',
 
     // backgroundColor:'white',
     marginLeft: '30px',
     justifyContent: 'spaceBetween',
     borderRadius: '15px',
-    width: '250px',
+    // width: '250px',
     textAlign: 'center',
+    color:'#01579b',
     //     color: 'blue',
     fontSize: '30px',
     //     fontWeight: 'bold',

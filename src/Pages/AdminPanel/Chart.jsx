@@ -1,7 +1,5 @@
 import React from 'react';
-import { PieChart } from 'react-minimal-pie-chart';
-import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
-
+import Typography from '@material-ui/core/Typography';
 import { Pie } from 'react-chartjs-2';
 
 
@@ -54,7 +52,10 @@ const ChartPage = () => {
   let chartInstance = null;
   return (
     <div className="App">
-     <h1>Distribution of Users</h1>
+    <br/>
+      <Typography variant="h6" gutterBottom component="div"style = {{textAlign:"center" , color:"white", backgroundColor:"#01579b"}} >
+               Distribution of Users
+              </Typography>
       <div style={styles.relative}>
         <div style={styles.pieContainer}>
           <Pie
@@ -76,7 +77,7 @@ const styles = {
     width: "40%",
     height: "40%",
     top: "50%",
-    left: "20%",
+    left: "50%",
     position: "absolute",
     transform: "translate(-50%, -50%)"
   },

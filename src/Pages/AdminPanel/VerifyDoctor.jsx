@@ -9,6 +9,8 @@ import {useStyles} from './Styling';
 import { Container } from '@material-ui/core';
 import Doctors from './Doctors';
 
+
+
 function VerifyDoctor() {
     const classes = useStyles();
     return (
@@ -18,9 +20,9 @@ function VerifyDoctor() {
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container className = {classes.container}>
-            
+           
 <Doctors />
-doccc
+
 
             </Container>
             </main>

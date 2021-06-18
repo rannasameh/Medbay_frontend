@@ -19,9 +19,6 @@ function ViewRatings() {
         <div className={classes.appBarSpacer} />
         <Container className = {classes.container}>
             <Bar />
-ratings
-
-
             </Container>
             </main>
         </div>
