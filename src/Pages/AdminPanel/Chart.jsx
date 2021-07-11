@@ -1,7 +1,11 @@
-import React from 'react';
+import React , { useEffect }from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Pie } from 'react-chartjs-2';
-
+import axios from 'axios'
+let malePatients=0
+let femalePatients=0
+let maleDoctors=0
+let femaleDoctors=100
 
 const pieOptions = {
   legend: {
@@ -28,28 +32,40 @@ const pieOptions = {
 };
 
 
+
+const ChartPage = () => {
+  let chartInstance = null;
+  const [users,setbackenddata]=React.useState([])
+useEffect(async ()=> {
+  axios.get('http://localhost:5000/getUsers')
+  .then(res =>{
+   setbackenddata(res.data)
+    malePatients=res.data.malePatients
+    femalePatients=res.data.femalePatients
+   maleDoctors=res.data.maleDoctors
+   femaleDoctors=res.data.femaleDoctors
+  })  
+ })
 const genPieData = () => {
   return {
     maintainAspectRatio: false,
     responsive: false,
     datasets: [
       {
-        data: [100, 150, 200, 56, 67],
+        data: [malePatients, femalePatients, maleDoctors, femaleDoctors],
         backgroundColor: [
           '#DBE9F3',
           '#7392BA',
           '#2E5894',
           '#072F5F',
-          '#58CCED',
+
         ],
         label: 'Dataset 1',
       },
     ],
-    labels: ['Male Patients', 'Female Patients ', 'Female Doctors', 'Male Doctors', 'Children'],
+    labels: ['Male Patients', 'Female Patients ', 'Female Doctors', 'Male Doctors']
   };
 };
-const ChartPage = () => {
-  let chartInstance = null;
   return (
     <div className="App">
     <br/>

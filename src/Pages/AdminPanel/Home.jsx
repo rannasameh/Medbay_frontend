@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React , {useEffect}from 'react';
 import Chart from './Chart';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -21,8 +21,17 @@ import Waw from './Waw';
 import Waw2 from './Waw2';
 import Waw3 from './Waw3';
 import Waw4 from './Waw4';
-
+import axios from 'axios'
 function Home() {
+    const [users,setbackenddata]=React.useState([])
+    useEffect(async ()=> {
+        axios.get('http://localhost:5000/getUsers')
+        .then(res =>{
+         setbackenddata(res.data)
+        
+        })
+           
+       })
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -63,7 +72,7 @@ function Home() {
                                     xl={3}
                                     xs={12}
                                 >
-                                    <Waw />
+                                    <Waw newpatients={users.newPatients}/>
                                 </Grid>
                                 <Grid
                                     item
@@ -72,7 +81,7 @@ function Home() {
                                     xl={3}
                                     xs={12}
                                 >
-                                    <Waw2 />
+                                    <Waw2 totalPatients={users.totalPatients}/>
                                 </Grid>
                                 <Grid
                                     item
@@ -81,7 +90,7 @@ function Home() {
                                     xl={3}
                                     xs={12}
                                 >
-                                    <Waw3 />
+                                    <Waw3 totaldoctors={users.totaldrs}/>
                                 </Grid>
                                 <Grid
                                     item
@@ -90,7 +99,7 @@ function Home() {
                                     xl={3}
                                     xs={12}
                                 >
-                                    <Waw4 sx={{ height: '100%' }} />
+                                    <Waw4 pendingdoctors={users.pending} sx={{ height: '100%' }} />
                                 </Grid>
                             </Grid>
                         </Container>

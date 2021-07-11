@@ -37,7 +37,7 @@ import {
               color="#01579b"
               variant="h3"
             >
-              4,000
+               {props.totaldoctors}
             </Typography>
           </Grid>
           <Grid item>

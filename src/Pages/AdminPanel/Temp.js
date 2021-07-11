@@ -38,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const { doctor } = props;
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -50,8 +50,8 @@ export default function RecipeReviewCard() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="Doctor's Name" className={classes.avatar}>
-            A
+          <Avatar aria-label={doctor.first_name+" "+doctor.last_name} className={classes.avatar}>
+           {doctor.first_name.charAt(0)}
           </Avatar>
         }
         action={
@@ -59,8 +59,8 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Doctor's Name"
-        subheader="Registration Date"
+        title={doctor.first_name+" "+doctor.last_name}
+        subheader={doctor.created_at}
       />
       <CardMedia
         className={classes.media}
@@ -86,9 +86,9 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Complain:</Typography>
+          <Typography paragraph>Number of reports:</Typography>
           <Typography paragraph>
-            blah blah blah blah blah blah 
+           {doctor.reports_number}
           </Typography>
         </CardContent>
       </Collapse>

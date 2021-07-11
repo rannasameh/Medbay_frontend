@@ -37,7 +37,7 @@ import {
               color="#01579b"
               variant="h3"
             >
-              500
+               {props.pendingdoctors}
             </Typography>
           </Grid>
           <Grid item>

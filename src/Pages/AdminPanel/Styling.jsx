@@ -83,6 +83,56 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
 
   },
+  fullHeight:
+  {
+      height: "100%",
+  },
+  biographyPaper:
+  { 
+    padding: '7%',
+    width: 650,
+    fontFamily: "Arial",
+  },
+  profileInformation:
+  {
+    height:600,
+    width:650,
+    alignItems: 'center',
+  },
+  profileMedical:
+  {
+    height:250,
+    width:650,
+  },
+  profileAlignment:
+  {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+    paddingLeft: "10%",
+  },  
+    profileAlignment2:
+    {
+      display: 'flex',
+      flexWrap: 'wrap',
+      marginTop: '2%',
+    },
+  
+
+    
+    profilePicture:
+    { 
+      height:200,
+      width:200,
+    },
+    doctorsInformation:
+    {
+      
+      width:650,
+
+    },
   minibox: {
     border: '1px solid #01579b',
 

@@ -16,11 +16,10 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
-import Checkbox from './Check';
-import Verify from './Verify';
-
-
+import { Button, Fab} from '@material-ui/core';
+import axios from 'axios'
+import history from './../../history';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 
 const useRowStyles = makeStyles({
   root: {
@@ -116,15 +115,26 @@ Row.propTypes = {
   }).isRequired,
 };
 
-const rows = [
-  createData("hana","Hana@hana.com" ,'link', 24567,<Verify />),
-  createData("hana","Hana@hana.com", 'link', 37455,<Verify />),
-  createData("hana","Hana@hana.com", 'link', 24456,<Verify />),
-  createData("hana","Hana@hana.com", 'link', 67675,<Verify />),
-  createData("hana","Hana@hana.com", 'link', 49567,<Verify />),
-];
 export default function DTable() {
-
+  const [doctors,setbackenddata]=React.useState([])
+  const [rows, setRows] = React.useState([]);
+  useEffect(async ()=> {
+    axios.get('http://localhost:5000/getNotVerifiedDoctors')
+    .then(res =>{
+     setbackenddata(res.data.message)
+     RowFormation()
+     
+    })
+       
+   })
+   function RowFormation(){
+    setRows(
+  doctors.map((r)=>
+   createData(r.first_name + " "+ r.last_name,r.email,r.phone_number, <Fab size="small"  style={{backgroundColor: "#01579b",color:'white'}} onClick={()=>history.push({pathname:`/ViewDoctor/${r.id}`})}> <PermIdentityIcon/></Fab>)  
+ )
+    )
+  }
+ 
   return (
     <TableContainer component={Paper}>
     <br />
@@ -137,9 +147,9 @@ export default function DTable() {
             <TableCell />
             <TableCell align="center" style={{color:"white"}}> Name </TableCell>
             <TableCell align="center" style={{color:"white"}}>Email</TableCell>
-            <TableCell align="center" style={{color:"white"}}> Medical Degree</TableCell>
-            <TableCell align="center" style={{color:"white"}}>Phone Number</TableCell>
-            <TableCell align="center" style={{color:"white"}}>Verify</TableCell>
+            <TableCell align="center" style={{color:"white"}}> Phone Number</TableCell>
+            <TableCell align="center" style={{color:"white"}}>View Profile</TableCell>
+          
           </TableRow>
         </TableHead>
         <TableBody align="center">
