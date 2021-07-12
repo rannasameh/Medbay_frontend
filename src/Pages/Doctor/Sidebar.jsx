@@ -166,19 +166,7 @@ class MiniDrawer extends React.Component {
               {/* <img src={medbay} alt="Medbay icon" style={{ height: '27px', width: '27px' }} /> */}
               {/* <SearchBar /> */}
             </Typography>
-            <div>     
-              <Tooltip title="Notifications">
-              <IconButton color="inherit" style={{right:20}}>
-              <Badge badgeContent={3} color="secondary">
-              {/* <Tooltip title="Notifications">  */}
-              <img src={notification} alt="Notification icon" style={{ height: '27px', width: '27px' }} />
-              {/* </Tooltip> */}
-                </Badge>
-              </IconButton>
-              </Tooltip>
-              {/* <IconButton color="inherit"><Tooltip title="Messages"><MessageIcon /></Tooltip></IconButton>
-              <IconButton color="inherit"><Tooltip title="Sign Out"><ExitToAppIcon /></Tooltip></IconButton> */}
-            </div>
+          
           </Toolbar>
         </AppBar>
         <Drawer

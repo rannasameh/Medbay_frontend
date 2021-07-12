@@ -12,8 +12,9 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import MenuItem from "@material-ui/core/MenuItem";
 import history from './history';
+import { validate } from 'email-validator';
 
-const accountType=["Doctor","Patient"]
+const accountType = ["Doctor", "Patient"]
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -37,68 +38,77 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const [tempType, setTempType] = React.useState("");
+  const [errorValue, setErrorValue] = React.useState("");
 
-  const [SignInFormat,SetSignInFormat]=React.useState({
-    email:"",
-    password:"",
-    account_type:''
+  const [SignInFormat, SetSignInFormat] = React.useState({
+    email: "",
+    password: "",
+    account_type: ''
   })
-  const [SignInResponse,SetSignInResponse]=React.useState([])
-  
+  const [SignInResponse, SetSignInResponse] = React.useState([])
 
-  function SignInForm(event){
-    const {name,value}=event.target;
-   SetSignInFormat(prevValue =>{
-    return{
-     ...prevValue,
-   [name]:value,};
-  });
-  if(value == "Patient")
-  {
-    setTempType("Patient");
+
+  function SignInForm(event) {
+    const { name, value } = event.target;
+    SetSignInFormat(prevValue => {
+      return {
+        ...prevValue,
+        [name]: value,
+      };
+    });
+    if (value == "Patient") {
+      setTempType("Patient");
+    }
+    else {
+      setTempType("Doctor");
+    }
   }
-  else
-  {
-    setTempType("Doctor");
-  }
-}
-function handleChange(){
-  {/*localStorage.setItem('email',SignInFormat.email);
+  function handleChange() {
+    {/*localStorage.setItem('email',SignInFormat.email);
   
 localStorage.setItem('password', SignInFormat.password);*/}
-    axios.post('http://localhost:5000/sessions',SignInFormat)
-    .then(res =>{
-      SetSignInResponse(res.data.user)
-      let user_id=res.data.user.id
-      console.log(user_id)
-      localStorage.setItem("token",res.data.token)
-      localStorage.setItem("user",user_id)
-      if(tempType == "Patient")
-      {
-        history.push("/PatientDashboard/")
+
+    if (SignInFormat.email !== "" && SignInFormat.password !== "" && SignInFormat.account_type !== "") {
+      if (validate(SignInFormat.email)) {
+        axios.post('http://localhost:5000/sessions', SignInFormat)
+          .then(res => {
+            SetSignInResponse(res.data.user)
+            let user_id = res.data.user.id
+            console.log(res.data);
+            localStorage.setItem("token", res.data.token)
+            localStorage.setItem("user", user_id)
+            if (tempType == "Patient") {
+              history.push("/PatientDashboard/")
+            }
+            else {
+              history.push("/DoctorDashboard/")
+            }
+          })
       }
-      else
-      {
-        history.push("/DoctorDashboard/")
+      else {
+        setErrorValue('Please enter valid email address!');
+        return;
       }
-    })
-  
-}
+    }
+    else {
+      setErrorValue("Please enter email, password, and choose account type!")
+      return;
+    }
+  }
   return (
-    
+
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in 
+          Sign in
         </Typography>
         <form className={classes.form} noValidate >
           <TextField
-          onChange={SignInForm}
+            onChange={SignInForm}
             variant="outlined"
             margin="normal"
             required
@@ -111,7 +121,7 @@ localStorage.setItem('password', SignInFormat.password);*/}
             value={SignInFormat.email}
           />
           <TextField
-           onChange={SignInForm}
+            onChange={SignInForm}
             variant="outlined"
             margin="normal"
             required
@@ -124,26 +134,25 @@ localStorage.setItem('password', SignInFormat.password);*/}
             value={SignInFormat.password}
           />
           <Grid container spacing={3}>
-          <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3}>
               <TextField
-        
-          id="accoutType"
-          select
-          fullWidth
-          label="type"
-          required
-          onChange={SignInForm}
-          name="account_type"
-          value={SignInFormat.account_type}
-        >
-          {accountType.map((option) => (
-            <MenuItem value={option}> {option} </MenuItem>
-          ))}
-    </TextField>
-    </Grid>
-    </Grid>
+                id="accoutType"
+                select
+                fullWidth
+                label="type"
+                required
+                onChange={SignInForm}
+                name="account_type"
+                value={SignInFormat.account_type}
+              >
+                {accountType.map((option) => (
+                  <MenuItem value={option}> {option} </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
           <Button
-           onClick={handleChange}
+            onClick={handleChange}
             fullWidth
             variant="contained"
             color="secondary"
@@ -164,9 +173,13 @@ localStorage.setItem('password', SignInFormat.password);*/}
               </Link>
             </Grid>
           </Grid>
+          <Typography style={{ color: 'red' }}>
+            {errorValue}
+          </Typography>
+
         </form>
       </div>
-      
+
     </Container>
   );
 }

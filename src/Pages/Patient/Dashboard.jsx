@@ -9,7 +9,7 @@ import Sidebar from "./Sidebar";
 import Copyright from "./Copyright";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import bot from './Pictures/bot.png';
+import bot from './Pictures/health-report.png';
 import chat from './Pictures/chat.png';
 import map from './Pictures/map.png';
 import loupe from './Pictures/loupe.png';
@@ -35,11 +35,11 @@ export default function Dashboard() {
           >
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightDashboard} square={false} elevation={10} style={{backgroundColor: '#ccdbee'}}>
-              <ButtonBase disableRipple style={{marginTop:'2%'}}>
+              <ButtonBase disableRipple style={{marginTop:'2%'}} onClick={() => history.push('/DisclaimerPage')}>
               <Typography align='center' variant='subtitle2'>
               <img src={bot} alt="Bot Image" style={{height:'27px', width:'27px'}}/>
               <br />
-              Chat with our advanced AI Chatbot and <br /> have a quick health check up
+              Use our symptom checker now and get a medical diagnosis now!
               </Typography>
               </ButtonBase>
               </Paper>

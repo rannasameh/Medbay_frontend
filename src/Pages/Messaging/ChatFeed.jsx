@@ -1,6 +1,7 @@
 import MyMessage from './MyMessage';
 import TheirMessage from './TheirMessage';
 import MessageForm from './MessageForm';
+import React from 'react';
 
 const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;
@@ -46,7 +47,7 @@ const ChatFeed = (props) => {
   return (
     <div className="chat-feed">
       <div className="chat-title-container">
-        <div className="chat-title">{chat?.title}</div>
+        <div className="chat-title">{chat.title}</div>
         <div className="chat-subtitle">
           {chat.people.map((person) => ` ${person.person.username}`)}
         </div>

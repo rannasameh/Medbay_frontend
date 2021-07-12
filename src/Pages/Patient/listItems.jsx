@@ -11,7 +11,7 @@ import user from './Pictures/user.png';
 import dashboard from './Pictures/dashboard.png';
 import reminder from './Pictures/reminder2.png';
 import chat from './Pictures/chat.png';
-import bot from './Pictures/bot.png';
+import bot from './Pictures/health-report.png';
 import logout from './Pictures/logout.png';
 
 
@@ -42,11 +42,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Messages" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => history.push("/DisclaimerPage")}>
       <ListItemIcon>
-      <img src={bot} alt="Bot icon" style={{height:'27px', width:'27px'}}/>
+      <img src={bot} alt="symptom checker icon" style={{height:'27px', width:'27px'}}/>
       </ListItemIcon>
-      <ListItemText primary="Chatbot" />
+      <ListItemText primary="Symptoms Checker" />
     </ListItem>
 
   </div>

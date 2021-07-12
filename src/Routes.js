@@ -16,6 +16,10 @@ import DoctorMessaging from "./Pages/Doctor/Messaging"
 import PatientRemindersPage from "./Pages/Patient/RemindersPage"
 import PatientMessaging from "./Pages/Patient/Messaging"
 import MedicalHistoryEdit from "./Pages/Doctor/PatientProfile"
+import AboutUsPage from "./Pages/AboutUsPage";
+import DisclaimerPage from './Pages/Patient/DisclaimerPage'
+import ContactUsPage from "./Pages/ContactUsPage";
+import ServicesPage from "./Pages/ServicesPage";
 
 import Home from "./Pages/AdminPanel/Home";
 import VerifyDoctor from "./Pages/AdminPanel/VerifyDoctor";
@@ -27,15 +31,19 @@ import Settings from "./Pages/AdminPanel/Settings";
 
 
 
+
 function Routes() {
     return (
         <Router history={history}>
             <Switch>
 
 
-            <Route path="/" exact component={Home} />
-                {/* <Route path="/" exact component={HomePage} /> */}
-                {/* <Route path="/SignInPage" exact component={SignInPage} />
+            {/* <Route path="/" exact component={Home} /> */}
+                <Route path="/" exact component={HomePage} />
+                <Route path="/aboutus" exact component={AboutUsPage} />
+                <Route path="/contactus" exact component={ContactUsPage} />
+                <Route path="/services" exact component={ServicesPage} />
+                <Route path="/SignInPage" exact component={SignInPage} />
                 <Route path="/SignUpPage" exact component={SignUpPage} />
                 <Route path="/BookPage" exact component={BookPage} />
 
@@ -44,16 +52,18 @@ function Routes() {
                 <Route path="/PatientRemindersPage" exact component={PatientRemindersPage} />
                 <Route path="/PatientMessaging" exact component={PatientMessaging} />
                 <Route path="/SearchPage" exact component={SearchPage} />
+                <Route path="/DisclaimerPage" exact component={DisclaimerPage} />
+                
 
                 <Route path="/DoctorDashboard" exact component={DoctorDashboard} />
                 <Route path="/DoctorProfile" exact component={DoctorProfile} />
                 <Route path="/ViewPatients" exact component={ViewPatients} />
                 <Route path="/DoctorMessaging" exact component={DoctorMessaging} />
-                <Route path="/MedicalHistoryEdit/:id?" exact component={MedicalHistoryEdit} /> */}
+                <Route path="/MedicalHistoryEdit/:id?" exact component={MedicalHistoryEdit} />
               
               
                 {/* <Route path="/" exact component={Home} /> */}
-                <Route path="/Home" exact component={Home} />
+                <Route path="/F-JaNdRgUkXp2s5v" exact component={Home} />
                 <Route path="/VerifyDoctor" exact component={VerifyDoctor} />
                 <Route path="/BanAccount" exact component={BanAccount} />
                 <Route path="/ViewReports" exact component={ViewReports} />

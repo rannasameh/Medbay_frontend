@@ -87,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   fixedHeightDashboardPaper:
   {
-    height: 120,
+    height: 125,
     width: 700,
   },
   medicinesToday: {
