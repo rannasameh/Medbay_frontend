@@ -30,12 +30,6 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Ban Account" />
     </ListItem>
-    <ListItem button onClick = {() => history.push("/ViewReports")}>
-      <ListItemIcon style ={{color:'white'}}>
-        <ReportIcon />
-      </ListItemIcon>
-      <ListItemText primary="View Reports" />
-    </ListItem>
     <ListItem button onClick = {() => history.push("/ViewRatings")}>
       <ListItemIcon>
         <StarRateIcon style={{ color: 'white' }} />

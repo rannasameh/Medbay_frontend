@@ -26,7 +26,7 @@ export default function AddressForm(props) {
       }
  
   const MaritalStatus = ["Married", "Single", "Divorced", "Seperated"];
-  const Gender=["Female","Male","Other"]
+  const Gender=["Female","Male"]
   return (
     <React.Fragment>
       <Typography  color="secondary" variant="h6" gutterBottom>
@@ -82,7 +82,7 @@ export default function AddressForm(props) {
             id="Gender"
             select
             fullWidth
-            label="Gender"
+            label="Gender *"
             name="gender"
             value={props.inputValues.gender}
             onChange={HandleChange}

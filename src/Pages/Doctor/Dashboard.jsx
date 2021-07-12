@@ -13,6 +13,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import pills from './Pictures/pills.png';
 import chat from './Pictures/chat.png';
 import clinic from './Pictures/hospital.png';
+import history from '../../history';
+
 
 export default function Dashboard(props) {
   const classes = useStyles();
@@ -56,7 +58,7 @@ export default function Dashboard(props) {
             </Grid>
             <Grid item xs={12} md={8} lg={9} >
               <Paper className={fixedHeightDashboard} elevation={10} style={{backgroundColor: '#ccdbee'}}>
-              <ButtonBase disableRipple style={{marginTop:'2%'}}>
+              <ButtonBase disableRipple style={{marginTop:'2%'}} onClick={()=>history.push("/Appointmentss")} >
               <Typography variant='subtitle2' align='center' >
               <img src={clinic} alt="Clinic" style={{height:'27px', width:'27px'}}/>
               <br />

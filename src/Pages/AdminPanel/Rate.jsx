@@ -9,17 +9,6 @@ export default function SimpleRating() {
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Controlled</Typography>
-        <Rating
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        />
-      </Box>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Read only</Typography>
         <Rating name="read-only" value={value} readOnly />
       </Box>
     </div>

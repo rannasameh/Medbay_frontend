@@ -6,6 +6,8 @@ import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import MenuItem from "@material-ui/core/MenuItem";
+import Upload from './Pages/Doctor/Pdf';
+
 export default function AddressForm(props) {
   const accountType=["Doctor","Patient"]
 
@@ -28,6 +30,11 @@ props.fn(prevValue=>{
           <TextField
             required
             fullWidth
+          //   error
+          // id="standard-error-helper-text"
+          // label="Error"
+          // defaultValue="Hello World"
+          // helperText="Incorrect entry."
             id="Username"
             label="Username"
             name="username"
@@ -94,6 +101,12 @@ props.fn(prevValue=>{
             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
           />
         </Grid>
+        <br/>
+       <Grid>
+      
+       <Upload />
+       </Grid>
+         
       
     </React.Fragment>
   );

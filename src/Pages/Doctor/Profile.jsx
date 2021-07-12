@@ -22,6 +22,9 @@ import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import {    Fab,} from '@material-ui/core';
 import TimeSlots from "./../../TimeSlots"
+import Upload from './../Patient/Upload';
+import Pdf from './Pdf';
+import Buffer from './../../Buffer';
 let id=localStorage.user
 
 let rating
@@ -66,13 +69,14 @@ export default function Profile() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                   {stillLoading?<h1>Loading</h1>: <div className={classes.profileAlignment}>
+                   {stillLoading?<h1><Buffer /></h1>: <div className={classes.profileAlignment}>
                         <div>
                             <div className={classes.profilePictureContainer}>
                                
                                 <StyledBadge overlap='circle' anchorOrigin={{horizontal:'right',vertical:'bottom'}}
                                  badgeContent={<Fab variant="rounded" color='primary' component='label'>
-                                     <EditIcon/>
+                                 <Upload />
+                                     {/* <EditIcon/> */}
                                  </Fab>}>
                                     
                                     <Avatar alt="Doctor's picture" className={classes.profilePicture} src={doctorDummy}/>
@@ -131,6 +135,8 @@ export default function Profile() {
                                 <hr size='1' width="98%" color='#606060' />
                                 <Typography style={{fontWeight: 'bold', fontSize: "30px",paddingBottom:'10px'}}>Certificates</Typography>
                                 <div style={{textAlign: 'center'}}>
+                                <Pdf />
+
                                 <img src={certificate1} alt="c1" style={{ height: '150px', width: '150px', padding:'10px' }} />
                                 <img src={certificate2} alt="c2" style={{ height: '150px', width: '150px', padding:'10px' }} />
                                 <img src={certificate3} alt="c3" style={{ height: '150px', width: '150px', padding:'10px'}} />

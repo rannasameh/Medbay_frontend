@@ -33,9 +33,9 @@ export default function CustomizedInputBase() {
 
   return (
     <Paper component="form" className={classes.root}>
-      <IconButton className={classes.iconButton} aria-label="menu">
+      {/* <IconButton className={classes.iconButton} aria-label="menu">
         <SearchIcon />
-      </IconButton>
+      </IconButton> */}
       <InputBase
         className={classes.input}
         placeholder="Search Google Maps"
