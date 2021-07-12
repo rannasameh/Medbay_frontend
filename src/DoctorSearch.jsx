@@ -9,6 +9,8 @@ import Rating from '@material-ui/lab/Rating';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import BookPage from '../src/Pages/BookPage';
+import Button from '@material-ui/core/Button';
+import history from './history';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ComplexGrid(props) {
   const classes = useStyles();
 let doctor=props.doctor
-
   return (
 
     <div className={classes.root} >
@@ -74,10 +75,7 @@ let doctor=props.doctor
               <Grid item>
             
               <CardActions>
-           
-                
                 <BookPage doctor={doctor}/>
-               
               </CardActions>
               </Grid>
             </Grid>

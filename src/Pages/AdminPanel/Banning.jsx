@@ -7,6 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import axios from 'axios';
 
 function PaperComponent(props) {
   return (
@@ -16,9 +17,9 @@ function PaperComponent(props) {
   );
 }
 
-export default function DraggableDialog() {
+export default function DraggableDialog(props) {
   const [open, setOpen] = React.useState(false);
-
+  const { doctor } = props;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -26,7 +27,16 @@ export default function DraggableDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-
+function handleBanning(){
+  console.log("in")
+  axios.post('http://localhost:5000/banDoctor',{doctor_id : doctor.id})
+  .then(res => {
+   console.log(res.data.message)
+     
+}
+)
+  handleClose()
+}
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -50,7 +60,7 @@ export default function DraggableDialog() {
           <Button autoFocus onClick={handleClose} color="primary">
              Send Warning 
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleBanning} color="primary">
             BAN!!!
           </Button>
         </DialogActions>

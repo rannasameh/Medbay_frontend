@@ -13,13 +13,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Tooltip from '@material-ui/core/Tooltip';
+import moment from 'moment'
+
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 import TimeSlots from "./TimeSlots"
-
+import Button from '@material-ui/core/Button';
+import history from './history';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+let a=[]
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -66,13 +68,7 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
-        <TableCell>
-        <Tooltip title="Reminders" placement="right">
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-          </Tooltip>
-        </TableCell>
+        
         <StyledTableRow><TableCell component="th" scope="row">
           {row.date}
         </TableCell></StyledTableRow>
@@ -107,25 +103,28 @@ Row.propTypes = {
     clinicname: PropTypes.number.isRequired,
   }).isRequired,
 };
-
+let currentdate=moment(new Date()).format('YYYY-MM-DD')
 let id=localStorage.user
 export default function DTable(props) {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
   const [AppointmentInfo, setAppointmentInfo] = React.useState([]);
   const [rows2, setRows2] = React.useState([]);
   useEffect(async () => {
     axios.post('http://localhost:5000/getapp',{patient_id : id})
           .then(res => {
               setAppointmentInfo(res.data.message)
-      
+    a=AppointmentInfo.filter(x=> x.appointment_date>currentdate )
+     
      RowFormation2()
           })
     }
     )
     function RowFormation2(){
       setRows2(
-         AppointmentInfo.map((r)=>
-      createData(r.appointment_date,TimeSlots[r.appointment_time].label,r.doctor_fname+" "+r.doctor_lname," ",
+         a.map((r)=>
+      createData(r.appointment_date,TimeSlots[r.appointment_time].label,
+       <Button onClick={()=>history.push({pathname:`/ViewDoctorProfile/${r.doctor_id}`})} color="primary">{r.doctor_fname } {r.doctor_lname} </Button> 
+        ,
        <Checkbox
       defaultChecked={checked}
       onChange={() => setChecked(!checked)}
@@ -141,14 +140,12 @@ export default function DTable(props) {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow style={{backgroundColor: "#01579b"}}>
-            <TableCell />
             <TableCell align="center" style={{color:"white"}}> Date </TableCell>
             <TableCell align="center" style={{color:"white"}}>Time</TableCell>
-            <TableCell align="center" style={{color:"white"}}> Doctor's Name</TableCell>
-            <TableCell align="center" style={{color:"white"}}></TableCell>
-            <TableCell align="center" style={{color:"white"}}></TableCell>
+            <TableCell align="center" style={{color:"white"}}> Doctor</TableCell>
             <TableCell align="center" style={{color:"white"}}>Done</TableCell>
-           
+            <TableCell align="center" style={{color:"white"}}></TableCell>
+            <TableCell align="center" style={{color:"white"}}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody align="center">

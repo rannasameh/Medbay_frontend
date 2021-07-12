@@ -61,9 +61,10 @@ const SettingsPassword = (props) => {
             p: 2
           }}
         >
-          <Button
+          <Button style={{marginLeft:"1000px"}}
             color="primary"
             variant="contained"
+
           >
             Update
           </Button>

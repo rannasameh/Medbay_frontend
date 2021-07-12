@@ -70,7 +70,7 @@ export default function RecipeReviewCard(props) {
       <CardContent>
       </CardContent>
       <CardActions disableSpacing>
-      <Banning />
+      <Banning doctor={doctor}/>
         <Tooltip title="Complain" placement="right">
         <IconButton
           className={clsx(classes.expand, {

@@ -34,7 +34,7 @@ function BanAccount() {
                {doctors.map(obj => 
                         {
                             return (<Grid item xs={3}>
-                              <Temp  doctor={obj}  />
+                              <Temp doctor={obj}  />
                                     </Grid>)
                        })
                    }

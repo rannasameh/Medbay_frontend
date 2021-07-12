@@ -128,7 +128,7 @@ function handleConfrim(){
   
   axios.post('http://localhost:5000/appointments',{doctor_id : props.doctor.id,patient_id :id ,appointment_time : slotvalue,appointment_date : chosendate})
   .then(res =>{
-
+console.log(res.data.message)
 })
 handleClose()
 }
@@ -158,7 +158,9 @@ const handleClose = () => {
   resetSwitch()
 }
   return (
+    
     <div>
+    
     <Tooltip  >
     <Button onClick={handleDoctorDetails}  variant="contained" size="small"  style={{ backgroundColor: "#01579b" ,color:"white ",padding:'10px',position: "absolute",bottom: "40px",right:'150px'}} >
     BOOK NOW 

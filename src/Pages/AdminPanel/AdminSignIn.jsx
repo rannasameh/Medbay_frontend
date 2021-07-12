@@ -11,8 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import MenuItem from "@material-ui/core/MenuItem";
-import history from './history';
-
+import history from "./../../history";
 const accountType=["Doctor","Patient"]
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,7 +40,7 @@ export default function SignIn() {
   const [SignInFormat,SetSignInFormat]=React.useState({
     email:"",
     password:"",
-    account_type:''
+   
   })
   const [SignInResponse,SetSignInResponse]=React.useState([])
   
@@ -53,14 +52,6 @@ export default function SignIn() {
      ...prevValue,
    [name]:value,};
   });
-  if(value == "Patient")
-  {
-    setTempType("Patient");
-  }
-  else
-  {
-    setTempType("Doctor");
-  }
 }
 function handleChange(){
   {/*localStorage.setItem('email',SignInFormat.email);
@@ -68,7 +59,8 @@ function handleChange(){
 localStorage.setItem('password', SignInFormat.password);*/}
 if(SignInFormat.account_type==="")
     setAccountError(1)
-    axios.post('http://localhost:5000/sessions',SignInFormat)
+
+    axios.post('http://localhost:5000/adminSignin',SignInFormat)
     .then(res =>{
       SetSignInResponse(res.data.user)
       if(res.data.message === "Invalid email or password")
@@ -77,21 +69,14 @@ if(SignInFormat.account_type==="")
       }
       else 
     {  
-    
       let user_id=res.data.user.id
       localStorage.setItem("token",res.data.token)
       localStorage.setItem("user",user_id)
-      if(tempType == "Patient")
-      {
-        history.push("/PatientDashboard/")
-      }
-      else
-      {
-        history.push("/DoctorDashboard/")
-      }}
-    })
+    history.push("/Home")
+      
+    }
   
-}
+})}
 const [error,setError]=React.useState(0)
 const [accountTypeError,setAccountError]=React.useState(0)
   return (
@@ -99,12 +84,12 @@ const [accountTypeError,setAccountError]=React.useState(0)
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       
-      <div className={classes.paper}>
+      <div className={classes.paper} >
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in 
+          Admin Sign in 
         </Typography>
         <form className={classes.form} noValidate >
           <TextField
@@ -134,27 +119,7 @@ const [accountTypeError,setAccountError]=React.useState(0)
             value={SignInFormat.password}
           />
           {error?<span style={{color:"red",marginRight:"50px"}}>Invalid email or password</span>:<span> </span>}
-          <Grid container >
-          <Grid item xs={12} sm={6}>
-              <TextField
-        
-          id="accoutType"
-          select
-          fullWidth
-          label="type"
-          required
-          onChange={SignInForm}
-          name="account_type"
-          value={SignInFormat.account_type}
-        >
-          {accountType.map((option) => (
-            <MenuItem value={option}> {option} </MenuItem>
-          ))}
-    </TextField>
-    {accountTypeError?<span style={{color:"red",paddingTop:"10px"}}>Please choose account type</span>:<span> </span>}
-    </Grid>
    
-    </Grid>
           <Button
            onClick={handleChange}
             fullWidth
@@ -165,13 +130,7 @@ const [accountTypeError,setAccountError]=React.useState(0)
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item>
-              <Button color="primary" style={{marginLeft:"100px"}}onClick = {() => history.push("/SignUpPage")}>
-                Don't have an account? Sign Up
-              </Button>
-            </Grid>
-          </Grid>
+        
         </form>
       </div>
       

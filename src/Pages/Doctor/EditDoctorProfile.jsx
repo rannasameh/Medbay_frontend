@@ -18,7 +18,15 @@ import MenuItem from "@material-ui/core/MenuItem";
 import countries from "./../../countries"
 import IconButton from '@material-ui/core/IconButton'
 import history from './../../history';
+import TimeSlots from "./../../TimeSlots"
+import Button from '@material-ui/core/Button';
 
+let starthour={ 
+    value: 0,
+    label: '08:30 AM - 09:00 AM'}
+let endhour={ 
+    value: 0,
+    label: '08:30 AM - 09:00 AM'}
       function countryToFlag(isoCode) {
         return typeof String.fromCodePoint !== 'undefined'
           ? isoCode
@@ -43,12 +51,18 @@ export default function Profile() {
     const classes = useStyles();
     const [patientInfo, setPatientInfo] = React.useState([]);
 
+
     useEffect(async () => {
-    axios.get(`http://localhost:5000/patients/${id}`)
+        axios.get(`http://localhost:5000/doctors/${id}`)
         .then(res => {
             setLoading(false)
             setPatientInfo(res.data.message)
+             starthour=TimeSlots[res.data.message.clinic_working_hours_from]
+             endhour=TimeSlots[res.data.message.clinic_working_hours_to]
+        
+           
         })
+        
     }
     )
     function HandleChange(event){
@@ -58,6 +72,7 @@ export default function Profile() {
             ...prevValue,
           [name]:value}
         })
+        console.log(updatedData)
           }
 function handleconfirm(){
   for (var propName in updatedData) {
@@ -65,10 +80,11 @@ function handleconfirm(){
       delete updatedData[propName];
     }
   }
-          axios.put(`http://localhost:5000/patients/${id}`,updatedData)
+          axios.put(`http://localhost:5000/doctors/${id}`,updatedData)
           .then(res =>{
+              console.log(res.data.message)
             setLoading(false)
-            history.push({pathname:'/PatientProfile'})
+            history.push({pathname:'/DoctorProfile'})
           })
         
         }
@@ -91,8 +107,18 @@ function handleconfirm(){
      emergency_first_name:"",
      emergency_last_name:"",
      emergency_phone_number:"",
-     height:"",
-     weight:""
+    clinic_street:"",
+    clinic_building:"",
+    clinic_city:"",
+    clinic_state:"",
+    clinic_zip_code:"",
+    to:"",
+    from:"",
+    clinic_country:"",
+    clinic_phone_number:"",
+    clinic_working_days:[],
+    clinic_working_hours_from:"",
+    clinic_working_hours_to:""
   })
     return (
         <div className={classes.root}>
@@ -113,7 +139,7 @@ function handleconfirm(){
             name="first_name"
             fullWidth
             onChange={HandleChange}
-          placeholder={patientInfo.patient_first_name}
+          placeholder={patientInfo.first_name}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -124,7 +150,7 @@ function handleconfirm(){
             style={{ margin: 8 ,marginBottom:"10px"}}
             fullWidth
             onChange={HandleChange}
-          placeholder={patientInfo.patient_last_name}
+          placeholder={patientInfo.last_name}
           />
         </Grid>
       </Grid>
@@ -226,12 +252,12 @@ function handleconfirm(){
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Autocomplete
+        <Autocomplete
       id="country"
       options={countries}
       autoHighlight
       fullWidth
-      name="country"
+      name="clinic_country"
       onChange={HandleChange}
       style={{ margin: 8 ,marginBottom:"10px"}}
       getOptionLabel={(option) => option.label}
@@ -243,8 +269,8 @@ function handleconfirm(){
       )}
       renderInput={(params) => (
         <TextField
-        placeholder={patientInfo.country}
-        name="country"
+        placeholder={patientInfo.clinic_country}
+        name="clinic_country"
         onChange={HandleChange}
         onSelect={HandleChange}
           {...params}
@@ -326,111 +352,196 @@ Change Password
           />
         </Grid>
         </Grid>
-        <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Typography   color="secondary" variant="h6" style={{ marginTop: "5px" }}>
-Change Medical information
-          </Typography>
-        </Grid>
-      </Grid>
+        <Typography   color="secondary" variant="h6" style={{ marginTop: "5px" }}>
+        Edit clinic information
+      </Typography>
       <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-          <TextField
-            style={{ margin: 8 ,marginBottom:"10px"}}
-            autoComplete="Height"
-            name="height"
-            fullWidth
-            id="Height"
-            placeholder={patientInfo.height}           
-             autoFocus
-            style={{ margin: 8 ,marginBottom:"10px"}}
-            onChange={HandleChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">cm</InputAdornment>
-              )
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            style={{ margin: 8 ,marginBottom:"10px"}}
-            fullWidth
-            onChange={HandleChange}
-            id="Weight"
-            name="weight"
-            placeholder={patientInfo.weight}
-            style={{ margin: 8 ,marginBottom:"10px"}}
-            autoComplete="Weight"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Kg</InputAdornment>
-              )
-            }}
-          />
-        </Grid>
-        </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Typography   color="secondary" variant="h6" style={{ marginTop: "5px" }}>
-            Emergency contact
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-          onChange={HandleChange}
-          placeholder={patientInfo.emergency_first_name}
-            id="EmergencyfirstName"
-            name="emergency_first_name"
-            style={{ margin: 8 ,marginBottom:"10px"}}
-            fullWidth
-            autoComplete="Emergency first Name"
-           
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             
-            id="EmergencylastName"
-            name="emergency_last_name"
             style={{ margin: 8 ,marginBottom:"10px"}}
+
+            id="ClinicAddress1"
+            name="clinic_street"
+            placeholder={patientInfo.clinic_street}
             fullWidth
-            autoComplete="Emergency last name"
+            autoComplete="Clinic Address1"
+            
             onChange={HandleChange}
-          placeholder={patientInfo.emergency_last_name}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+                      style={{ margin: 8 ,marginBottom:"10px"}}
+
+            id="ClinicAddress2"
+            name="clinic_building"
+            placeholder={patientInfo.clinic_building}
+
+            fullWidth
+            autoComplete="Clinic Address2"
+            
+            onChange={HandleChange}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={6} sm={6}>
+          <TextField
+                        style={{ margin: 8 ,marginBottom:"10px"}}
+
+            id="ClinicCity"
+            name="clinic_city"
+            placeholder={patientInfo.clinic_city}
+
+            fullWidth
+            autoComplete=" address-level2"
+         
+            onChange={HandleChange}
+          />
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <TextField
+            id="ClinicState"
+            style={{ margin: 8 ,marginBottom:"10px"}}
+
+            name="clinic_state"
+            placeholder={patientInfo.clinic_state}
+
+            fullWidth
+         
+            onChange={HandleChange}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={6} sm={6}>
+          <TextField
+                        style={{ margin: 8 ,marginBottom:"10px"}}
+
+            id="ClinicZip"
+            name="clinic_zip_code"
+            placeholder={patientInfo.clinic_zip_code}
+
+            fullWidth
+            autoComplete=" postal-code"
+         
+            onChange={HandleChange}
+          />
+        </Grid>
+        <Grid item xs={6} sm={6}>
+        <Autocomplete
+      id="clinic_country"
+      options={countries}
+      autoHighlight
+      fullWidth
+      name="clinic_country"
+      getOptionLabel={(option) => option.label}
+      renderOption={(option) => (
+        <React.Fragment>
+          <span>{countryToFlag(option.code)}</span>
+          {option.label} ({option.code}) +{option.phone}
+        </React.Fragment>
+      )}
+      renderInput={(params) => (
+        <TextField
+        placeholder={patientInfo.clinic_country}
+        style={{ margin: 8 ,marginBottom:"10px"}}
+
+        name="clinic_country"
+        onChange={HandleChange}
+        onSelect={HandleChange}
+          {...params}
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: 'country', 
+          }}
+        />
+      )}
+    />
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <TextField
-            autoComplete="EmergencyPhoneNumber"
-            name="emergency_phone_number"
-            fullWidth
-            id="EmergencyPhoneNumber"
+            autoComplete="ClinicPhoneNumber"
+            name="clinic_phone_number"
             style={{ margin: 8 ,marginBottom:"10px"}}
-            onChange={HandleChange}
-          placeholder={patientInfo.emergency_phone_number}
+
+            fullWidth
+            id="ClinicPhoneNumber"
+            placeholder={patientInfo.clinic_phone_number}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">+201</InputAdornment>
               )
             }}
-          
+         
+            onChange={HandleChange}
           />
         </Grid>
+      </Grid>
+      <Grid container spacing={3} 
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+         }}>
+        <Grid item xs={6} sm={6}>
+          <TextField
+        fullWidth
+        id="ClinicWorkingHoursfrom"
+        select
+        placeholder={patientInfo.clinic_street}
+        defaultValue = ""
+
+        name="from"
+        style={{ margin: 8 ,marginBottom:"10px"}}
+
+        onChange={HandleChange}
+        style={{ marginBottom:"10px"}}
+      >
+        {TimeSlots.map((option) => (
+          <MenuItem value={option.label} onClick={()=> updatedData.from=option.value}> {option.label.slice("",8)} </MenuItem>
+        ))}
+      </TextField>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+        <TextField 
+        fullWidth
+        id="ClinicWorkingHoursto"
+        select
+        defaultValue = ""
+
+        placeholder={patientInfo.clinic_street}
+        style={{ margin: 8 ,marginBottom:"10px"}}
+
+        name="to"
+      
+        onChange={HandleChange}
+        
+      >
+        {TimeSlots.map((option) => (
+          <MenuItem value={option.label} onClick={()=> updatedData.to=option.value} > {option.label.slice("",8)} </MenuItem>
+
+        ))}
+      </TextField>
+        </Grid>
+      </Grid>
+      
+    
+     
+      <Grid container spacing={3}>
+        
         <Grid item xs={6}>
-        <IconButton
-               fillwidth
+        <Button
                style={{ backgroundColor:"#01579b",
-               borderRadius: "1px",color:'white' ,marginLeft:"300px",marginTop:"90px"
+               borderRadius: "1px",color:'white' ,marginLeft:"1100px"
                }}
                onClick={handleconfirm}
              >
                 Save Changes 
-             </IconButton>
+             </Button>
       </Grid>
       </Grid>
 

@@ -22,9 +22,13 @@ import {useStyles} from './Styling';
 import Sidebar from './Sidebar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import moment from 'moment'
 
+let a=[]
 let j=0
 let g=[]
+let currentdate=moment(new Date()).format('YYYY-MM-DD')
+
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -137,6 +141,7 @@ export default function CollapsibleTable() {
   axios.post('http://localhost:5000/getmedications',{patient_id : id})
       .then(res => {
           setMedInfo(res.data.message)
+          a=medicationInfo.filter(x=> x.start_date>currentdate )
          RowFormation()
       })
   }
@@ -145,7 +150,7 @@ export default function CollapsibleTable() {
   
   function RowFormation(){
     setRows(
-  medicationInfo.map((r)=>
+  a.map((r)=>
    createData(r.id,r.start_date,r.times,r.name,r.dosage,r.doctor_fname+" "+r.doctor_lname, 
    <Checkbox
    defaultChecked={checked}

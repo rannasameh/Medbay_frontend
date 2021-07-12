@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { useState } from 'react';
 import {
   Box,
@@ -10,6 +10,7 @@ import {
   Grid,
   TextField
 } from '@material-ui/core';
+import axios from 'axios';
 
 const states = [
   {
@@ -21,6 +22,7 @@ const states = [
     label: 'Cairo'
   },
 ];
+let id=localStorage.user
 
 const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
@@ -38,7 +40,19 @@ const AccountProfileDetails = (props) => {
       [event.target.name]: event.target.value
     });
   };
+  const [AdminInfo, setAdminInfo] = React.useState([]);
+  const [stillLoading,setLoading]=React.useState(true)
 
+  useEffect(async () => {
+    axios.get(`http://localhost:5000/admins/${id}`)
+    .then(res => {
+        setLoading(false)
+        setAdminInfo(res.data.message)
+    
+    })
+    
+  }
+  )
   return (
     <form
       autoComplete="off"
@@ -64,11 +78,11 @@ const AccountProfileDetails = (props) => {
               <TextField
                 fullWidth
                 helperText="Please specify the first name"
-                label="First name"
                 name="firstName"
                 onChange={handleChange}
-                required
-                value={values.firstName}
+                
+                placeholder={AdminInfo.first_name}
+             
                 variant="outlined"
               />
             </Grid>
@@ -79,14 +93,16 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+              
                 name="lastName"
                 onChange={handleChange}
-                required
-                value={values.lastName}
+                
+                placeholder={AdminInfo.last_name}
+                
                 variant="outlined"
               />
             </Grid>
+          
             <Grid
               item
               md={6}
@@ -94,26 +110,11 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Phone Number"
+                placeholder={AdminInfo.phone_number}
                 name="phone"
                 onChange={handleChange}
                 type="number"
-                value={values.phone}
+               
                 variant="outlined"
               />
             </Grid>
@@ -124,40 +125,13 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Country"
                 name="country"
                 onChange={handleChange}
-                required
-                value={values.country}
+                placeholder={AdminInfo.country}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
+         
           </Grid>
         </CardContent>
         <Divider />

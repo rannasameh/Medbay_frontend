@@ -52,7 +52,7 @@ const genPieData = () => {
     responsive: false,
     datasets: [
       {
-        data: [malePatients, femalePatients, maleDoctors, femaleDoctors],
+        data: [60, 70, 100, 110],
         backgroundColor: [
           '#DBE9F3',
           '#7392BA',

@@ -9,8 +9,7 @@ import Copyright from './Copyright';
 import doctorDummy from './Pictures/userprofile.jpeg';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
-import Rating from '@material-ui/lab/Rating';
-import { Icon } from 'semantic-ui-react'
+import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from '@material-ui/core/styles'
@@ -18,6 +17,8 @@ import Avatar from '@material-ui/core/Avatar';
 import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import {Fab, Grid,} from '@material-ui/core';
+import history from './../../history';
+
 let diseases=[]
 let allergies=[]
 let medications=[]
@@ -57,6 +58,7 @@ export default function Profile() {
   
     }
     )
+    
    
    const [stillLoading,setLoading]=React.useState(true)
 
@@ -81,6 +83,7 @@ export default function Profile() {
                             </div>
                             <br />
                             <Paper className={classes.biographyPaper} style={{ backgroundColor: 'white' }}>
+                            <Button color='primary' onClick={()=>history.push("/EditProfile")} style={{marginLeft:"160px"}}>Edit profile </Button>
                             <Typography  style={{fontWeight: 'bold', fontSize: "30px",paddingBottom:'10px',textAlign: 'center'}}> {patientInfo.patient_first_name +" "+ patientInfo.patient_last_name}</Typography>
                             <Typography style={{fontWeight: 'bold',fontSize: "22px",paddingBottom:'10px'}}>About</Typography>
                            
@@ -130,6 +133,9 @@ export default function Profile() {
                         </div>
                         <div>
                             <Paper className={classes.doctorsInformation} style={{ backgroundColor: 'white', paddingLeft:"2%",marginTop:'30px'}}>
+                            <Button display="inline"   color="secondary"  onClick={()=>history.push("/ViewTests")} style={{marginLeft:"260px",fontSize:" 15px"}}>
+                               View current medications and tests
+                                </Button>
                                 <Typography style={{fontWeight: 'bold', fontSize: "30px",paddingBottom:'10px'}}>Medical History</Typography>
                                 <Typography style={{fontWeight: 'bold',fontSize: "22px"}}>General Information</Typography>
                                 <Typography style={{fontWeight: 'bold',fontSize: "17px"}}>Blood Type</Typography>

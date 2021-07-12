@@ -37,8 +37,7 @@ import {
               color="#01579b"
               variant="h3"
             >
-              1,000
-            </Typography>
+20            </Typography>
           </Grid>
           <Grid item>
             <Avatar
