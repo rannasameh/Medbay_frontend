@@ -111,10 +111,10 @@ export default function SignInSide() {
       <Grid item xs={12} sm={8} md={5}  elevation={6} square>
         <div className={classes.paper}>
           <Typography color='secondary'  style={{fontFamily:"Impact,fantasy",fontWeight:"bold" ,fontSize:'34px'}}component="h1" variant="h5">
-           Chat wit Medi-Bot
+           Symptoms Checker
           </Typography>
           <Typography component="h1" variant="h5" style={{paddingTop:'50px',paddingLeft:'30px',fontFamily:'"Times New Roman", Times, serif' }}>
-           A medical chatbot that eases finding the right doctor for you based on your symptoms
+           Get a proper certified diagnosis from our symoptoms checker to help you identify what you're suffering from! (meant for information purposes only.)
           </Typography> 
           
         </div>

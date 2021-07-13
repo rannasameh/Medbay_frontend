@@ -63,7 +63,7 @@ axios.post(`http://localhost:5000/getmedications`,{patient_id : id})
 )
 
 
-},[])
+})
 function removeDuplicates(){
      filteredArr = medications.reduce((acc, current) => {
         const x = acc.find(item => item.name === current.name);

@@ -104,7 +104,7 @@ function Home() {
                             </Grid>
                         </Container>
                     </Box>
-
+<br />
                     <Patients />
                     <Bar />
                     <container>

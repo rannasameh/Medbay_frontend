@@ -30,12 +30,20 @@ import ViewDoctors from "./Pages/Patient/ViewDoctors"
 import AdminSignIn from "./Pages/AdminPanel/AdminSignIn"
 import ViewDoctorProfile from "./Pages/Patient/ViewDoctorProfile"
 import PatientTests from "./Pages/Doctor/ViewPatientTests"
+import AboutUsPage from "./Pages/AboutUsPage";
+import DisclaimerPage from './Pages/Patient/DisclaimerPage'
+import ContactUsPage from "./Pages/ContactUsPage";
+import ServicesPage from "./Pages/ServicesPage";
+import Appointmentss from './Pages/Doctor/Appointmentss';
 
 function Routes() {
     return (
         <Router history={history}>
             <Switch>
                  <Route path="/" exact component={HomePage} /> 
+                 <Route path="/aboutus" exact component={AboutUsPage} />
+                <Route path="/contactus" exact component={ContactUsPage} />
+                <Route path="/services" exact component={ServicesPage} />
                  <Route path="/SignInPage" exact component={SignInPage} />
                 <Route path="/SignUpPage" exact component={SignUpPage} />
                 <Route path="/BookPage" exact component={BookPage} />
@@ -46,6 +54,7 @@ function Routes() {
                 <Route path="/PatientMessaging" exact component={PatientMessaging} />
                 <Route path="/SearchPage" exact component={SearchPage} />
                 <Route path="/EditProfile" exact component={EditProfile} />
+                <Route path="/DisclaimerPage" exact component={DisclaimerPage} />
 
                 <Route path="/DoctorDashboard" exact component={DoctorDashboard} />
                 <Route path="/DoctorProfile" exact component={DoctorProfile} />
@@ -64,6 +73,7 @@ function Routes() {
                 <Route path="/ViewRatings" exact component={ViewRatings} />
                 <Route path="/Settings" exact component={Settings} />
                 <Route path="/EditDoctorProfile" exact component={EditDoctorProfile} />
+                <Route path="/Appointmentss" exact component={Appointmentss} />
 
                 
 

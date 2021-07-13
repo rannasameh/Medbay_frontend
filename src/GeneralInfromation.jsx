@@ -82,7 +82,7 @@ export default function AddressForm(props) {
             id="Gender"
             select
             fullWidth
-            label="Gender"
+            label="Gender *"
             name="gender"
             value={props.inputValues.gender}
             onChange={HandleChange}
@@ -112,7 +112,7 @@ export default function AddressForm(props) {
           <TextField
             id="address2"
             name="building"
-            label="Building number"
+            label="Building number *"
             fullWidth
             autoComplete="address-line2"
             value={props.inputValues.building}
@@ -178,7 +178,7 @@ export default function AddressForm(props) {
         onChange={HandleChange}
         onSelect={HandleChange}
           {...params}
-          label="Choose a country"
+          label="Choose a country *"
           inputProps={{
             ...params.inputProps,
             autoComplete: 'country', 
@@ -214,7 +214,7 @@ export default function AddressForm(props) {
             name="MaritalStatus"
             select
             fullWidth
-            label="Marital Status"
+            label="Marital Status *"
             name="marital_status"
             value={props.inputValues.marital_status}
             onChange={HandleChange}

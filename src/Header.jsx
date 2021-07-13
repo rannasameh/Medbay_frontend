@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 const sections = [
   { title: 'Home', url: 'http://localhost:3000/' },
-  { title: 'About us', url: '#' },
-  { title: 'Sevices', url: '#' },
-  { title: 'Contact us', url: '#' },
+  { title: 'About us', url: 'http://localhost:3000/aboutus' },
+  { title: 'Sevices', url: 'http://localhost:3000/services' },
+  { title: 'Contact us', url: 'http://localhost:3000/contactus' },
 ];
 
 export default function Header(props) {
@@ -62,9 +62,6 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton color="secondary">
-          <SearchIcon />
-        </IconButton>
         <Button  size="small" color="secondary" onClick={()=>history.push(`/SignInPage`)}  style={{ margin: 8 }} >
          Login
         </Button>

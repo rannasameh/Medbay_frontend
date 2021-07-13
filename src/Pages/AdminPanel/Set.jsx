@@ -28,7 +28,7 @@ const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
     firstName: 'Admin',
     lastName: 'Admin',
-    email: 'admin@admin.com',
+    email: '',
     phone: '',
     state: 'Alexandria',
     country: 'Egypt'
@@ -78,7 +78,9 @@ const AccountProfileDetails = (props) => {
               <TextField
                 fullWidth
                 helperText="Please specify the first name"
+                label='First Name'
                 name="firstName"
+              
                 onChange={handleChange}
                 
                 placeholder={AdminInfo.first_name}
@@ -93,8 +95,9 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-              
+                helperText="Please specify the last name"
                 name="lastName"
+                label="Last Name"
                 onChange={handleChange}
                 
                 placeholder={AdminInfo.last_name}
@@ -102,6 +105,21 @@ const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Email Address"
+                name="email"
+                onChange={handleChange}
+                placeholder={AdminInfo.email}
+                variant="outlined"
+              />
+            </Grid>
+          
           
             <Grid
               item
@@ -110,6 +128,7 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
+                label="Phone Number"
                 placeholder={AdminInfo.phone_number}
                 name="phone"
                 onChange={handleChange}
@@ -126,6 +145,7 @@ const AccountProfileDetails = (props) => {
               <TextField
                 fullWidth
                 name="country"
+                label="Country"
                 onChange={handleChange}
                 placeholder={AdminInfo.country}
                 variant="outlined"

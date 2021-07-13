@@ -25,6 +25,7 @@ import TimeSlots from "./../../TimeSlots"
 import history from './../../history';
 import Button from '@material-ui/core/Button';
 import Upload from './../Patient/Upload';
+import Loading from './../Patient/Loading';
 let avatar=""
 let id=localStorage.user
 
@@ -72,7 +73,7 @@ export default function Profile() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                   {stillLoading?<h1>Loading</h1>: <div className={classes.profileAlignment}>
+                   {stillLoading?<h1><Loading /></h1>: <div className={classes.profileAlignment}>
                         <div>
                             <div className={classes.profilePictureContainer}>
                                

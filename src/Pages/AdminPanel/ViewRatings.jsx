@@ -8,6 +8,7 @@ import Sidebar from "./Sidebar";
 import {useStyles} from './Styling';
 import { Container } from '@material-ui/core';
 import Bar from "./Bar";
+import Drate from './Drate';
 
 function ViewRatings() {
     const classes = useStyles();
@@ -18,7 +19,7 @@ function ViewRatings() {
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container className = {classes.container}>
-            <Bar />
+            <Drate />
             </Container>
             </main>
         </div>

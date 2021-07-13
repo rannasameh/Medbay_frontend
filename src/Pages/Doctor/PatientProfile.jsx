@@ -32,6 +32,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import history from '../../history';
+import Loading from './../Patient/Loading';
 let id=localStorage.user
 
 let diseases=[]
@@ -225,7 +226,7 @@ const [stillLoading,setLoading]=React.useState(true)
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                   { stillLoading?<h1>Loading</h1>:<div className={classes.profileAlignment}>
+                   { stillLoading?<h1><Loading /></h1>:<div className={classes.profileAlignment}>
                         <div>
                             <div className={classes.profilePictureContainer}>
                                

@@ -104,7 +104,7 @@ props.fn(prevValue=>{
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Speciality and certificates
+        Speciality and certificates (*)
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={6}>
@@ -165,7 +165,7 @@ props.fn(prevValue=>{
           <TextField
             id="ClinicAddress2"
             name="clinic_building"
-            label="Clinic building"
+            label="Clinic building *"
             fullWidth
             autoComplete="Clinic Address2"
             value={props.inputValues.clinic_building}
@@ -231,7 +231,7 @@ props.fn(prevValue=>{
         onChange={HandleChange}
         onSelect={HandleChange}
           {...params}
-          label="Choose a country"
+          label="Choose a country *"
           inputProps={{
             ...params.inputProps,
             autoComplete: 'country', 
@@ -271,7 +271,7 @@ props.fn(prevValue=>{
         fullWidth
         id="ClinicWorkingHoursfrom"
         select
-        label="Working hours from"
+        label="Working hours from (*)"
         name="from"
         value={props.inputValues.from}
         onChange={HandleChange}
@@ -287,7 +287,7 @@ props.fn(prevValue=>{
         fullWidth
         id="ClinicWorkingHoursto"
         select
-        label="Working hours to"
+        label="Working hours to (*)"
         name="to"
         value={props.inputValues.to}
         onChange={HandleChange}
@@ -301,7 +301,7 @@ props.fn(prevValue=>{
         </Grid>
       </Grid>
       
-   <Typography  style={{ marginTop:"10px",paddingBottom:'10px'}}>Select working days</Typography>
+   <Typography  style={{ marginTop:"10px",paddingBottom:'10px'}}>Select working days (*)</Typography>
    <Grid container spacing={3} 
       style={{
         display: 'flex',
