@@ -24,7 +24,8 @@ import {    Fab,} from '@material-ui/core';
 import TimeSlots from "./../../TimeSlots"
 import history from './../../history';
 import Button from '@material-ui/core/Button';
-
+import Upload from './../Patient/Upload';
+let avatar=""
 let id=localStorage.user
 
 let rating
@@ -55,6 +56,8 @@ export default function Profile() {
              starthour=TimeSlots[res.data.message.clinic_working_hours_from]
              endhour=TimeSlots[res.data.message.clinic_working_hours_to]
             rating=res.data.message.rating
+            avatar = res.data.avatar
+            console.log('eyad',res.data.avatar)
            
         })
         
@@ -75,10 +78,11 @@ export default function Profile() {
                                
                                 <StyledBadge overlap='circle' anchorOrigin={{horizontal:'right',vertical:'bottom'}}
                                  badgeContent={<Fab variant="rounded" color='primary' component='label'>
-                                     <EditIcon/>
+                                 <Upload />
+                                     {/* <EditIcon/> */}
                                  </Fab>}>
                                     
-                                    <Avatar alt="Doctor's picture" className={classes.profilePicture} src={doctorDummy}/>
+                                    <Avatar alt="Doctor's picture" className={classes.profilePicture} src={avatar}/>
                                     </StyledBadge>
                         
                             </div>

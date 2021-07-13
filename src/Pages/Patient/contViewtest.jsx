@@ -21,14 +21,29 @@ import history from '../../history';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
-import MenuItem from "@material-ui/core/MenuItem";
-import TextField from "@material-ui/core/TextField";
-import DoneIcon from '@material-ui/icons/Done';
-import GetAppIcon from '@material-ui/icons/GetApp';
 let filteredArr=[]
+const downloadFile = value => {
+    axios.request({
+        method: "get",
+        url: value,
+        responseType: 'arraybuffer'
+    }).then(response => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const contentDisposition = response.headers['content-disposition'];
+        let fileName = 'unknown';
+        if (contentDisposition) {
+            const fileNameMatch = contentDisposition.match(/filename="(.+)"/);
+            if (fileNameMatch.length === 2)
+                fileName = fileNameMatch[1];
+        }
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
 
-
-let testtid
+    })
+}
 const StyledBadge = withStyles(theme => ({
     badge: {
         width: 30,
@@ -42,17 +57,7 @@ export default function Profile() {
     const [tests, setTests] = React.useState([]);
     const [medications, setMedications] = React.useState([]);
     let id=localStorage.user
-    useEffect(async () => {
-        setLoading(false)
-    axios.post(`http://localhost:5000/getTests`,{id : id})
-        .then(res => {
-            console.log(res.data.message)
-            setTests(res.data.message)
-            
-    }
-    )
 
-},[])
 useEffect(async () => {
     setLoading(false)
 axios.post(`http://localhost:5000/getmedications`,{patient_id : id})
@@ -61,9 +66,7 @@ axios.post(`http://localhost:5000/getmedications`,{patient_id : id})
     removeDuplicates()
 }
 )
-
-
-},[])
+})
 function removeDuplicates(){
      filteredArr = medications.reduce((acc, current) => {
         const x = acc.find(item => item.name === current.name);
@@ -75,31 +78,21 @@ function removeDuplicates(){
       }, []);
    
 }
-const [stillLoading,setLoading]=React.useState(true)
-const [testt,setid]=React.useState(0)
-function handlechange(event){
-    const {name,value}=event.target
-    SetDone(false)
-    setid(value)
-
-}
-const [isDone,SetDone]=React.useState(false)
-
 function setfile({ target: { files } })
-{
+{console.log(id)
     if (files[0].name !== ' No file chosen')
     {
         let formData = new FormData();
-         let url = ` http://localhost:5000/updateTests`;
-        formData.append('testFile' , files[0])
-        formData.append('testID' ,testt)
+         let url = ` http://localhost:5000/updateTests/${localStorage.user}`;
+        formData.append('avatar' , files[0])
         axios.request({
             method: "post", 
             url: url, 
             data: formData,
             // headers: { Authorization: "Bearer " + localStorage.token },
         }).then (res => {
-            SetDone(true)
+            console.log("done")
+             history.go(0);
             
         })
    
@@ -109,7 +102,7 @@ function setfile({ target: { files } })
         console.log('not chosen')
     }
 }
-
+   const [stillLoading,setLoading]=React.useState(true)
 
     return (
         <div className={classes.root}>
@@ -133,69 +126,22 @@ function setfile({ target: { files } })
                         <Typography style={{fontWeight: 'bold',fontSize: "22px"}}>Required tests</Typography>
                         {tests.map(test =>
                         <div>
-                        <Grid container spacing={3} style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        flexWrap: 'wrap',
-                                    }}>
+                        <Grid container spacing={3}>
                         <Grid item xs={6}>
                         <Typography > {"- "+test.name+" "+"Prescribed by Dr. "+test.doctor_fname+" "+test.doctor_lname} </Typography>
                         </Grid>
-                        <Grid item xs={6}  style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        flexWrap: 'wrap',
-                                    }}>
-                       { test.testFile === ' ' ? <span>Not attached yet</span> : <a href={test.testFile}> view report</a>
-                       } 
-                       </Grid>
+                        <Grid item xs={6}>
+                        <input className={classes.input} id="icon-button-file" type="file" onChange={setfile}/>
+                                    <label htmlFor="icon-button-file">
+                                        <IconButton color="#DBE9F3" aria-label="upload picture" component="span">
+                                        <AttachFileIcon style={{backgroundColor:'primary'}} />
+                                        Attach 
+                                        </IconButton>
+                                    </label>
+                                    </Grid>
                                     </Grid>
                                     </div>
                        ) }
-                       <Typography style={{paddingBottom:'10px'}}>----------------------------------------------------------------------------------------------------</Typography>
-                        <Typography style={{fontWeight: 'bold',fontSize: "22px"}}>Upload test</Typography>
-                       <Grid container spacing={3} style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        flexWrap: 'wrap',
-                                    }}>
-                                     <Grid item xs={6}>
-                             <TextField 
-                            fullWidth
-                            id="chooseTest"
-                            select
-                            label="Choose test"
-                            name="choose test"
-                            value={testt}
-                            onChange={handlechange}
-                            style={{ marginBottom:"10px"}}
-                        >
-                            {tests.map((test) => (
-                            <MenuItem value={test.id} > {test.name} </MenuItem>
-
-                            ))}
-                        </TextField>
-                        </Grid>
-                        <Grid item xs={6} >
-                        <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        flexWrap: 'wrap',
-                                    }}>
-
-                        
-                        <Button color="secondary" component="label" startIcon={<AttachFileIcon />} >
-                                Attach a file
-                                    <input
-                                    type="file"
-                                    style={{ display: "none" }}
-                                    onChange={setfile}
-                                />
-                            </Button>
-                            {isDone&&<span><DoneIcon /></span>}
-</div>
-                        </Grid>
-                         </Grid>
                          
 
                             </Paper>    

@@ -55,17 +55,7 @@ export default function Dashboard() {
               </ButtonBase>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={8} lg={9} >
-              <Paper className={fixedHeightDashboard} elevation={10} style={{backgroundColor: '#ccdbee'}}>
-              <ButtonBase disableRipple style={{marginTop:'2%'}}>
-              <Typography variant='subtitle2' align='center' >
-              <img src={map} alt="Map icon" style={{height:'27px', width:'27px'}}/>
-              <br />
-              Find the nearest clinic to your location and <br /> book your appointment now!
-              </Typography>
-              </ButtonBase>
-              </Paper>
-            </Grid>
+         
             <Grid item xs={12} md={8} lg={9} >
               <Paper className={fixedHeightDashboard} square={false} elevation={10} style={{backgroundColor: '#ccdbee'}}>
               <ButtonBase disableRipple style={{marginTop:'2%'}} onClick={()=>history.push("/SearchPage")}>

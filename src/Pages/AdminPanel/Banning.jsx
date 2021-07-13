@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 import axios from 'axios';
+import emailjs from "emailjs-com";
 
 function PaperComponent(props) {
   return (
@@ -37,6 +38,35 @@ function handleBanning(){
 )
   handleClose()
 }
+
+
+function sendEmail() {
+  console.log("Email SENT!")
+   var templateParams = {
+       name: 'James',
+       email: 'karimelhamy2126@gmail.com',
+       //email:SignUpform.email,
+       message: 'You have successfully created an account!',
+       to_name:'karim'
+      
+   };
+
+   emailjs.send('service_03p15jn', 'template_yjw6rsv', templateParams, 'user_awcHMTTxtdDbgPuZVpWVs')
+   .then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+   }, function(error) {
+      console.log('FAILED...', error);
+   });
+}
+
+
+function handlewarning(){
+
+
+sendEmail();
+
+  handleClose()
+}
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -57,7 +87,7 @@ function handleBanning(){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={handlewarning} color="primary">
              Send Warning 
           </Button>
           <Button onClick={handleBanning} color="primary">

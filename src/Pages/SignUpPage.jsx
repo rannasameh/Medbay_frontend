@@ -144,9 +144,8 @@ export default function Checkout() {
   const CreateU = () => {
     var axios = require('axios');
     var data = {
-      "username": SignUpform.username,
-      "secret": "123",
-      "email": SignUpform.email,
+      "username": SignUpform.email,
+      "secret": "123456",
       "first_name": SignUpform.first_name,
       "last_name": SignUpform.last_name,
       "custom_json": {"fav_game": "Candy Crush", "high_score": 2002}

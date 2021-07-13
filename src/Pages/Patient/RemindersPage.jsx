@@ -80,13 +80,6 @@ function Row(props) {
     
       <React.Fragment>
       <TableRow className={classes.root}>
-        <TableCell>
-        <Tooltip title="Instructions" placement="right">
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-          </Tooltip>
-        </TableCell>
         <StyledTableRow><TableCell component="th" scope="row">
           {row.date}
         </TableCell></StyledTableRow>
@@ -96,23 +89,7 @@ function Row(props) {
         <TableCell align="center">{row.prescribedby}</TableCell>
         <TableCell align="center">{row.done}</TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="h8" gutterBottom component="div" style = {{color:"MidnightBlue"}}>
-                
-                Instructions
-  
-                {/* <App /> */}
 
-              </Typography>
-              
-              {row.instructions}
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
     </React.Fragment>
   );
 }
@@ -130,7 +107,7 @@ Row.propTypes = {
 };
 
 export default function CollapsibleTable() {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
   const [medicationInfo, setMedInfo] = React.useState([]);
   const [rows, setRows] = React.useState([]);
   const sidebar_classes = useStyles();
@@ -181,7 +158,7 @@ export default function CollapsibleTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow style={{backgroundColor: "#01579b"}}>
-            <TableCell />
+            
             <TableCell align="center" style={{color:"white"}}> Date </TableCell>
             <TableCell align="center" style={{color:"white"}}>Time</TableCell>
             <TableCell align="center" style={{color:"white"}}> Medicine's Name</TableCell>

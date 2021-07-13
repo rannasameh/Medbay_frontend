@@ -29,7 +29,7 @@ import ViewTests from "./Pages/Patient/ViewTests"
 import ViewDoctors from "./Pages/Patient/ViewDoctors"
 import AdminSignIn from "./Pages/AdminPanel/AdminSignIn"
 import ViewDoctorProfile from "./Pages/Patient/ViewDoctorProfile"
-
+import PatientTests from "./Pages/Doctor/ViewPatientTests"
 
 function Routes() {
     return (
@@ -55,7 +55,7 @@ function Routes() {
                 <Route path="/ViewTests" exact component={ViewTests} />
                 <Route path="/ViewDoctors" exact component={ViewDoctors} />
                 <Route path="/ViewDoctorProfile/:id?" exact component={ViewDoctorProfile} />
-               
+                <Route path="/PatientTests/:id?" exact component={PatientTests} />
                 <Route path="/Admin" exact component={AdminSignIn} />
                 <Route path="/Home" exact component={Home} />
                 <Route path="/VerifyDoctor" exact component={VerifyDoctor} />

@@ -59,6 +59,11 @@ function BookPage(props) {
     setDateState(e);
     chosendate=moment(e).format('YYYY-MM-DD')
     chosenday=new Date(chosendate).toLocaleString('en-us', {weekday:'long'})
+    if(chosendate<currentdate)
+   { offday=true
+    console.log("pass")
+    }
+    else 
     handleOffDays()
    
   }

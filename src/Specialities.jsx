@@ -49,7 +49,6 @@ const Speciality=["Allergists/Immunologists",
     }
 export default function Specialities(props) {
   function HandleChange(event){
-    console.log(working_hours_from)
     const {name,value}=event.target
     props.fn(prevValue=>{
       return{ 

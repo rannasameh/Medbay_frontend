@@ -63,9 +63,9 @@ export default function SignIn() {
   }
 }
 function handleChange(){
-  {/*localStorage.setItem('email',SignInFormat.email);
+  localStorage.setItem('email',SignInFormat.email);
   
-localStorage.setItem('password', SignInFormat.password);*/}
+localStorage.setItem('password', SignInFormat.password);
 if(SignInFormat.account_type==="")
     setAccountError(1)
     axios.post('http://localhost:5000/sessions',SignInFormat)
@@ -81,8 +81,10 @@ if(SignInFormat.account_type==="")
       let user_id=res.data.user.id
       localStorage.setItem("token",res.data.token)
       localStorage.setItem("user",user_id)
+      localStorage.setItem("type",tempType)
       if(tempType == "Patient")
       {
+       
         history.push("/PatientDashboard/")
       }
       else

@@ -6,11 +6,10 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Copyright from './Copyright';
-import doctorDummy from './Pictures/userprofile.jpeg';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
-import EditIcon from '@material-ui/icons/Edit';
+
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar';
@@ -27,7 +26,6 @@ import DoneIcon from '@material-ui/icons/Done';
 import GetAppIcon from '@material-ui/icons/GetApp';
 let filteredArr=[]
 
-
 let testtid
 const StyledBadge = withStyles(theme => ({
     badge: {
@@ -37,16 +35,16 @@ const StyledBadge = withStyles(theme => ({
     },
 }))(Badge);
 let id=localStorage.user
-export default function Profile() {
+
+export default function Profile(props) {
     const classes = useStyles();
     const [tests, setTests] = React.useState([]);
     const [medications, setMedications] = React.useState([]);
     let id=localStorage.user
     useEffect(async () => {
         setLoading(false)
-    axios.post(`http://localhost:5000/getTests`,{id : id})
+    axios.post(`http://localhost:5000/getTests`,{id : patient_id})
         .then(res => {
-            console.log(res.data.message)
             setTests(res.data.message)
             
     }
@@ -55,7 +53,7 @@ export default function Profile() {
 },[])
 useEffect(async () => {
     setLoading(false)
-axios.post(`http://localhost:5000/getmedications`,{patient_id : id})
+axios.post(`http://localhost:5000/getmedications`,{patient_id : patient_id})
 .then(res => {
     setMedications(res.data.message)
     removeDuplicates()
@@ -63,7 +61,7 @@ axios.post(`http://localhost:5000/getmedications`,{patient_id : id})
 )
 
 
-},[])
+})
 function removeDuplicates(){
      filteredArr = medications.reduce((acc, current) => {
         const x = acc.find(item => item.name === current.name);
@@ -110,7 +108,7 @@ function setfile({ target: { files } })
     }
 }
 
-
+const patient_id=props.match.params.id
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -146,58 +144,12 @@ function setfile({ target: { files } })
                                         alignItems: 'center',
                                         flexWrap: 'wrap',
                                     }}>
-                       { test.testFile === ' ' ? <span>Not attached yet</span> : <a href={test.testFile}> view report</a>
+                      { test.testFile === ' ' ? <span>Not attached yet</span> : <a href={test.testFile}> view report</a>
                        } 
                        </Grid>
                                     </Grid>
                                     </div>
                        ) }
-                       <Typography style={{paddingBottom:'10px'}}>----------------------------------------------------------------------------------------------------</Typography>
-                        <Typography style={{fontWeight: 'bold',fontSize: "22px"}}>Upload test</Typography>
-                       <Grid container spacing={3} style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        flexWrap: 'wrap',
-                                    }}>
-                                     <Grid item xs={6}>
-                             <TextField 
-                            fullWidth
-                            id="chooseTest"
-                            select
-                            label="Choose test"
-                            name="choose test"
-                            value={testt}
-                            onChange={handlechange}
-                            style={{ marginBottom:"10px"}}
-                        >
-                            {tests.map((test) => (
-                            <MenuItem value={test.id} > {test.name} </MenuItem>
-
-                            ))}
-                        </TextField>
-                        </Grid>
-                        <Grid item xs={6} >
-                        <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        flexWrap: 'wrap',
-                                    }}>
-
-                        
-                        <Button color="secondary" component="label" startIcon={<AttachFileIcon />} >
-                                Attach a file
-                                    <input
-                                    type="file"
-                                    style={{ display: "none" }}
-                                    onChange={setfile}
-                                />
-                            </Button>
-                            {isDone&&<span><DoneIcon /></span>}
-</div>
-                        </Grid>
-                         </Grid>
-                         
-
                             </Paper>    
                         </div>
                     </div>}

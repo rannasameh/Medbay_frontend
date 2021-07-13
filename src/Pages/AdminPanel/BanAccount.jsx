@@ -17,9 +17,11 @@ function BanAccount() {
  
     const [doctors,setbackenddata]=React.useState([])
     useEffect(async ()=> {
+        console.log("in")
         axios.get('http://localhost:5000/getReportedDoctors')
         .then(res =>{
          setbackenddata(res.data.message)
+         console.log(res.data.message)
         })
            
        })

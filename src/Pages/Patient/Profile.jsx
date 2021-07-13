@@ -18,6 +18,9 @@ import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import {Fab, Grid,} from '@material-ui/core';
 import history from './../../history';
+import Loading from './Loading';
+import { ImageOutlined } from '@material-ui/icons';
+import Upload from './Upload';
 
 let diseases=[]
 let allergies=[]
@@ -27,7 +30,7 @@ let special_habits=[]
 let family_diseases=[]
 let family_allergies=[]
 let family_other_illnesses=[]
-
+let avatar=""
 const StyledBadge = withStyles(theme => ({
     badge: {
         width: 30,
@@ -53,6 +56,7 @@ export default function Profile() {
             family_allergies=res.data.message.family_allergies
             family_other_illnesses=res.data.message.family_other_illnesses
             special_habits=res.data.message.special_habits
+            avatar = res.data.avatar
             
         })
   
@@ -69,16 +73,16 @@ export default function Profile() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                    {stillLoading?<h1>Loading</h1>:<div className={classes.profileAlignment}>
+                    {stillLoading?<h1><Loading/></h1>:<div className={classes.profileAlignment}>
                         <div>
                             <div className={classes.profilePictureContainer}>
                                
                                 <StyledBadge overlap='circle' anchorOrigin={{horizontal:'right',vertical:'bottom'}}
                                  badgeContent={<Fab variant="rounded" color='primary' component='label'>
-                                     <EditIcon/>
+                                 <Upload />
                                  </Fab>}>
                                     
-                                    <Avatar alt="Doctor's picture" className={classes.profilePicture} src={doctorDummy}/>
+                                    <Avatar alt="Doctor's picture" className={classes.profilePicture} src={avatar}/>
                                     </StyledBadge>
                             </div>
                             <br />

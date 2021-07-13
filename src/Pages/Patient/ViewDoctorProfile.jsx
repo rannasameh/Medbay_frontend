@@ -58,7 +58,7 @@ export default function Profile(props) {
           
         })
         
-    }
+    },[]
     )
     function handleReport(){
         axios.post(`http://localhost:5000/increamentReports`,{id: id})

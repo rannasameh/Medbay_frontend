@@ -29,6 +29,9 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import history from '../../history';
 let id=localStorage.user
 
 let diseases=[]
@@ -62,7 +65,7 @@ export default function Profile(props) {
             family_other_illnesses=res.data.message.family_other_illnesses
         })
   
-    }
+    },[]
     )
     const classes = useStyles();
     const [patientInfo, setPatientInfo] = React.useState([]);
@@ -210,7 +213,8 @@ export default function Profile(props) {
 function handleSubmit(){
     axios.post('http://localhost:5000/medications',{patient_id :patient_id,medications :inputList,reports :inputListreports,doctor_id :id})
     .then(res =>{
-      console.log(res.data.message)
+      setOpen(false)
+      
    })
 }
 const [stillLoading,setLoading]=React.useState(true)
@@ -225,13 +229,11 @@ const [stillLoading,setLoading]=React.useState(true)
                         <div>
                             <div className={classes.profilePictureContainer}>
                                
-                                <StyledBadge overlap='circle' anchorOrigin={{horizontal:'right',vertical:'bottom'}}
-                                 badgeContent={<Fab variant="rounded" color='primary' component='label'>
-                                     <EditIcon/>
-                                 </Fab>}>
+                                
+                                
                                     
                                     <Avatar alt="Doctor's picture" className={classes.profilePicture} src={doctorDummy}/>
-                                    </StyledBadge>
+                                  
                             </div>
                             <br />
                             <Paper className={classes.biographyPaper} style={{ backgroundColor: 'white' }}>
@@ -583,7 +585,16 @@ const [stillLoading,setLoading]=React.useState(true)
                         <Typography style={{paddingBottom:'10px'}}>----------------------------------------------------------------------------------------------------</Typography>
                         <Typography style={{fontWeight: 'bold',fontSize: "22px"}}>Special Habits</Typography>
                         <Typography >- Smoking </Typography>
-                                
+                        <Typography style={{paddingBottom:'10px'}}>----------------------------------------------------------------------------------------------------</Typography>
+                       <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        flexWrap: 'wrap',
+                                    }}>
+                        <Typography style={{fontWeight: 'bold',fontSize: "22px"}}>Current Medications and previous tests</Typography>
+
+                                <Button  onClick={()=>history.push({pathname:`/PatientTests/${patient_id}`})}><FindInPageIcon/></Button>
+                                </div>
                         <Typography style={{paddingBottom:'10px'}}>----------------------------------------------------------------------------------------------------</Typography>
 
                                 <Typography style={{fontWeight: 'bold', fontSize: "30px", paddingBottom:'10px',paddingTop:'10px'}}>Family Medical History</Typography>
