@@ -78,14 +78,10 @@ export default function Profile(props) {
                    {stillLoading?<h1>Loading</h1>: <div className={classes.profileAlignment}>
                         <div>
                             <div className={classes.profilePictureContainer}>
-                               
-                                <StyledBadge overlap='circle' anchorOrigin={{horizontal:'right',vertical:'bottom'}}
-                                 badgeContent={<Fab variant="rounded" color='primary' component='label'>
-                                     <EditIcon/>
-                                 </Fab>}>
+        
                                     
                                     <Avatar alt="Doctor's picture" className={classes.profilePicture} src={doctorDummy}/>
-                                    </StyledBadge>
+                                
                         
                             </div>
                             <br />

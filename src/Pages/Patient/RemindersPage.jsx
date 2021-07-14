@@ -121,7 +121,7 @@ export default function CollapsibleTable() {
           a=medicationInfo.filter(x=> x.start_date>currentdate )
          RowFormation()
       })
-  }
+  },
   )
  
   
