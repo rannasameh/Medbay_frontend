@@ -12,6 +12,9 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import MenuItem from "@material-ui/core/MenuItem";
 import history from './history';
+import Sendemails from './Sendemails';
+import emailjs from "emailjs-com";
+import { sendEmail } from './Sendemails';
 
 const accountType=["Doctor","Patient"]
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +48,7 @@ export default function SignIn() {
   })
   const [SignInResponse,SetSignInResponse]=React.useState([])
   
+  //setInterval(sendEmail,60000);
 
   function SignInForm(event){
     const {name,value}=event.target;
@@ -63,9 +67,9 @@ export default function SignIn() {
   }
 }
 function handleChange(){
-  {/*localStorage.setItem('email',SignInFormat.email);
+  localStorage.setItem('email',SignInFormat.email);
   
-localStorage.setItem('password', SignInFormat.password);*/}
+localStorage.setItem('password', SignInFormat.password);
 if(SignInFormat.account_type==="")
     setAccountError(1)
     axios.post('http://localhost:5000/sessions',SignInFormat)
