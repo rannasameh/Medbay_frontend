@@ -16,6 +16,7 @@ import MedicalHistory from"../MedicalHistory";
 import HealingIcon from '@material-ui/icons/Healing';
 import Header from"../Header";
 import axios from 'axios';
+import emailjs from "emailjs-com";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -89,6 +90,9 @@ export default function Checkout() {
         throw new Error("Unknown step");
     }
   }
+
+
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [SignUpform,SetSignUpForm]=React.useState({
@@ -141,6 +145,30 @@ export default function Checkout() {
     clinic_working_hours_to:""
   })
 
+  function sendEmail() {
+    console.log("Email SENT!")
+     var templateParams = {
+         name: 'James',
+         //email: 'karimelhamy2126@gmail.com',
+         email:SignUpform.email,
+         message: 'You have successfully created an account!',
+         to_name:'karim'
+        
+     };
+  
+     emailjs.send('service_03p15jn', 'template_yjw6rsv', templateParams, 'user_awcHMTTxtdDbgPuZVpWVs')
+     .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+     }, function(error) {
+        console.log('FAILED...', error);
+     });
+  }
+  
+
+
+
+
+
   const CreateU = () => {
     var axios = require('axios');
     var data = {
@@ -180,6 +208,7 @@ export default function Checkout() {
     if(activeStep === 2 )
     {
       firstMethod();
+      sendEmail();
     }
     setActiveStep(activeStep + 1)
    if( activeStep === 2 && SignUpform.AccountType==='Doctor') 

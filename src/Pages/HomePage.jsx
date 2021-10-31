@@ -14,8 +14,36 @@ import Typography from '@material-ui/core/Typography';
 import Carousel from"react-material-ui-carousel";
 import Slide3 from'../Images/sliddee.jpeg'
 import Slide4 from'../Images/Slidd.webp'
+import emailjs from "emailjs-com";
 
 let id=localStorage.user
+
+
+function sendEmail() {
+  console.log("Email SENT!")
+   var templateParams = {
+       name: 'James',
+       email: 'karimelhamy2126@gmail.com',
+       //email:SignUpform.email,
+       message: 'You have successfully created an account!',
+       to_name:'karim'
+      
+   };
+
+   emailjs.send('service_favse3e', 'template_4kd99ke', templateParams, 'user_unkmNdrSwYmUT3PSzf1ep')
+   .then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+      
+   }, function(error) {
+      console.log('FAILED...', error);
+   });
+}
+
+// var intervalId= setInterval(sendEmail() {
+//   alert("interval every 5 secs")},5000 );
+//setInterval(sendEmail,60000);
+
+
 
 
 
